@@ -10,6 +10,8 @@ const web3 = new Web3("https://rpc.ftm.tools/");
 const BOT_API = process.env.BOT_API;
 var api = new TelegramBot(BOT_API);
 
+const chats = process.env.CHAT_IDS.split(":")
+
 //ENTER SMART CONTRACT ADDRESS BELOW. see abi.js if you want to modify the abi
 const CONTRACT_ADDRESS = "0x682e473fca490b0adfa7efe94083c1e63f28f034";
 const CONTRACT_ABI = require("./abi.json");
@@ -17,10 +19,12 @@ const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 
 async function sendMessage(message) {
   // The chat_id received in the message update
-  let data = { chat_id: process.env.CHAT_ID, text: message };
-  api.invoke("sendMessage", data, function (err, mess) {
-    if (err) throw err;
-  });
+  chats.forEach(id => {
+    let data = { chat_id: id, text: message };
+    api.invoke("sendMessage", data, function (err, mess) {
+      if (err) throw err;
+    });
+  })
 }
 
 sendMessage("holi");
