@@ -27,11 +27,9 @@ async function sendMessage(message) {
   })
 }
 
-sendMessage("holi");
-
 async function getEvents() {
   let latest_block = await web3.eth.getBlockNumber();
-  let historical_block = latest_block - 400; // you can also change the value to 'latest' if you have a upgraded rpc
+  let historical_block = latest_block - 500; // you can also change the value to 'latest' if you have a upgraded rpc
   const message = "latest: " + latest_block + " historical block: " + historical_block;
   console.log(message);
   const events = await contract.getPastEvents(
