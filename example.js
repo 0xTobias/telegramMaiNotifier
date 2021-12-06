@@ -40,7 +40,7 @@ async function getEvents() {
 async function getTransferDetails(data_events) {
   for (i = 0; i < data_events.length; i++) {
     let amount = data_events[i]["returnValues"]["amount"];
-    const message = "Someone returned their MAI to yvDAI pool: " + amount;
+    const message = "Someone returned their MAI to the yvDAI pool: " + amount;
     sendMessage(message);
   }
 }
