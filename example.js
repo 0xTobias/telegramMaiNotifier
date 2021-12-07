@@ -2,8 +2,6 @@ const Web3 = require("web3");
 var TelegramBot = require("telegrambot");
 require("dotenv").config();
 
-console.log(process.env.BOT_API);
-
 // ENTER A VALID RPC URL!
 const web3 = new Web3("https://rpc.ftm.tools/");
 
@@ -42,7 +40,8 @@ async function getEvents() {
 async function getTransferDetails(data_events) {
   for (i = 0; i < data_events.length; i++) {
     let amount = data_events[i]["returnValues"]["amount"];
-    const message = "Someone returned their MAI to the yvDAI pool: " + amount;
+    let amountParsed = amount/1.0e18;
+    const message = "Someone returned their MAI to the yvDAI pool: " + amountParsed;
     sendMessage(message);
   }
 }
@@ -50,5 +49,5 @@ async function getTransferDetails(data_events) {
 getEvents(CONTRACT_ABI, CONTRACT_ADDRESS);
 const interval = setInterval(function () {
   getEvents(CONTRACT_ABI, CONTRACT_ADDRESS);
-}, 50000);
+}, 300000);
 
