@@ -1,4 +1,5 @@
 {
+  "main": "example.js",
   "dependencies": {
     "dotenv": "^10.0.0",
     "telegrambot": "^0.1.0",
