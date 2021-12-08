@@ -1,6 +1,9 @@
 {
   "main": "example.js",
-  "scripts": {"start": "node example.js"},
+  "scripts": {
+    "start": "node example.js",
+    "postinstall": "npm run build"
+  },
   "dependencies": {
     "dotenv": "^10.0.0",
     "telegrambot": "^0.1.0",
