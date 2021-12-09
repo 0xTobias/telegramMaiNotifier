@@ -64,7 +64,8 @@ async function checkMaiBalance() {
    const balanceParsed = balance / 1.0e18;
    console.log(balanceParsed);
    if(balanceParsed > 2) {
-     sendMessage("MAI available for mint on yvDAI vault: " + balanceParsed)
+     console.log("Notifying with a balance of " + balanceParsed)
+     sendMessage("MAI availabasdfasfafasdfasdfasfafle for mint on yvDAI vault: " + balanceParsed)
    }
 }
 
