@@ -63,7 +63,7 @@ async function checkMaiBalance() {
    const balance = await maiContract.methods.balanceOf(CONTRACT_ADDRESS).call();
    const balanceParsed = balance / 1.0e18;
    console.log(balanceParsed);
-   if(balanceParsed > 1) {
+   if(balanceParsed > 2) {
      sendMessage("MAI available for mint on yvDAI vault: " + balanceParsed)
    }
 }
