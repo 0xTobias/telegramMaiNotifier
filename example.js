@@ -15,7 +15,7 @@ var http = require("http").Server(app);
 const BOT_API = process.env.BOT_API;
 var api = new TelegramBot(BOT_API);
 
-const chats = process.env.CHAT_IDS.split(":")
+const chats = process.env.CHAT_IDS.split(":");
 
 //ENTER SMART CONTRACT ADDRESS BELOW. see abi.js if you want to modify the abi
 const CONTRACT_ADDRESS = "0x682E473FcA490B0adFA7EfE94083C1E63f28F034";
@@ -39,18 +39,19 @@ http.listen(port, function () {
 
 async function sendMessage(message) {
   // The chat_id received in the message update
-  chats.forEach(id => {
+  chats.forEach((id) => {
     let data = { chat_id: id, text: message };
     api.invoke("sendMessage", data, function (err, mess) {
       if (err) throw err;
     });
-  })
+  });
 }
 
 async function getEvents() {
   let latest_block = await web3.eth.getBlockNumber();
   let historical_block = latest_block - 100; // you can also change the value to 'latest' if you have a upgraded rpc
-  const message = "latest: " + latest_block + " historical block: " + historical_block;
+  const message =
+    "latest: " + latest_block + " historical block: " + historical_block;
   console.log(message);
   const events = await contract.getPastEvents(
     "PayBackToken", // change if your looking for a different event
@@ -60,20 +61,22 @@ async function getEvents() {
 }
 
 async function checkMaiBalance() {
-   const balance = await maiContract.methods.balanceOf(CONTRACT_ADDRESS).call();
-   const balanceParsed = balance / 1.0e18;
-   console.log(balanceParsed);
-   if(balanceParsed > 2) {
-     console.log("Notifying with a balance of " + balanceParsed)
-     sendMessage("MAI availabasdfasfafasdfasdfasfafle for mint on yvDAI vault: " + balanceParsed)
-   }
+  const balance = await maiContract.methods.balanceOf(CONTRACT_ADDRESS).call();
+  const balanceParsed = balance / 1.0e18;
+  console.log(balanceParsed);
+  console.log("lol now it's commented")
+  if (balanceParsed > 2) {
+    console.log("Notifying with a balance of " + balanceParsed);
+    //sendMessage("MAI available for mint on yvDAI vault: " + balanceParsed);
+  }
 }
 
 async function getTransferDetails(data_events) {
   for (i = 0; i < data_events.length; i++) {
     let amount = data_events[i]["returnValues"]["amount"];
-    let amountParsed = amount/1.0e18;
-    const message = "Someone returned their MAI to the yvDAI pool: " + amountParsed;
+    let amountParsed = amount / 1.0e18;
+    const message =
+      "Someone returned their MAI to the yvDAI pool: " + amountParsed;
     sendMessage(message);
   }
 }
@@ -84,4 +87,3 @@ const interval = setInterval(function () {
   checkMaiBalance();
   getEvents(CONTRACT_ABI, CONTRACT_ADDRESS);
 }, 60000);
-
