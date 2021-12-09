@@ -1,9 +1,16 @@
 const Web3 = require("web3");
 var TelegramBot = require("telegrambot");
+var express = require("express");
 require("dotenv").config();
 
 // ENTER A VALID RPC URL!
 const web3 = new Web3("https://rpc.ftm.tools/");
+
+var bodyParser = require("body-parser");
+var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+var http = require("http").Server(app);
 
 const BOT_API = process.env.BOT_API;
 var api = new TelegramBot(BOT_API);
@@ -20,6 +27,10 @@ const maiContract = new web3.eth.Contract(
   MAI_CONTRACT_ABI,
   MAI_CONTRACT_ADDRESS
 );
+
+app.get("/", function (req, res) {
+  res.send("OK");
+});
 
 async function sendMessage(message) {
   // The chat_id received in the message update
