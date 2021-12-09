@@ -32,6 +32,11 @@ app.get("/", function (req, res) {
   res.send("OK");
 });
 
+var port = process.env.PORT || 3000;
+http.listen(port, function () {
+  console.log("listening on *:" + port);
+});
+
 async function sendMessage(message) {
   // The chat_id received in the message update
   chats.forEach(id => {
@@ -58,7 +63,7 @@ async function checkMaiBalance() {
    const balance = await maiContract.methods.balanceOf(CONTRACT_ADDRESS).call();
    const balanceParsed = balance / 1.0e18;
    console.log(balanceParsed);
-   if(balanceParsed > 0) {
+   if(balanceParsed > 1) {
      sendMessage("MAI available for mint on yvDAI vault: " + balanceParsed)
    }
 }
