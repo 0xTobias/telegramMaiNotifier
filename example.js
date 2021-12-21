@@ -22,28 +22,28 @@ const maiContract = new web3.eth.Contract(
   MAI_CONTRACT_ADDRESS
 );
 
-const PORT = 3000;
+// const PORT = 3000;
 
-const { createServer } = require("http");
+// const { createServer } = require("http");
 
-const server = createServer((req, res) => {
-  res.send("Ok")
-});
+// const server = createServer((req, res) => {
+//   res.send("Ok")
+// });
 
-server.listen(PORT, () => {
-  console.log(`:: server listening on port: ${PORT}`);
-});
-
-
-
-// app.get("/", (req, res) => res.send("Home Page Route"));
+// server.listen(PORT, () => {
+//   console.log(`:: server listening on port: ${PORT}`);
+// });
 
 
-// var port = process.env.PORT || 3000;
 
-// app.listen(port, () =>
-//   console.log(`Server running on ${port}, http://localhost:${port}`)
-// );
+app.get("/", (req, res) => res.send("Home"));
+
+
+var port = process.env.PORT || 3000;
+
+app.listen(port, () =>
+  console.log(`Server running on ${port}, http://localhost:${port}`)
+);
 
 async function sendMessage(message) {
   // The chat_id received in the message update
@@ -67,5 +67,6 @@ async function checkMaiBalance() {
 
 checkMaiBalance();
 const interval = setInterval(function () {
+  sendMessage("working!");
   checkMaiBalance();
 }, 60000);
