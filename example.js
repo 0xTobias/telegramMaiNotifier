@@ -27,10 +27,7 @@ const PORT = 3000;
 const { createServer } = require("http");
 
 const server = createServer((req, res) => {
-  res.writeHead(302, {
-    Location: "https://google.com/",
-  });
-  res.end();
+  res.send("Ok")
 });
 
 server.listen(PORT, () => {
