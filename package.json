@@ -1,7 +1,8 @@
 {
   "main": "example.js",
   "scripts": {
-    "start": "node example.js"
+    "start": "node example.js",
+    "build": "npm install"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
