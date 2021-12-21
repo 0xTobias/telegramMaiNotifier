@@ -34,17 +34,6 @@ const maiContract = new web3.eth.Contract(
 //   console.log(`:: server listening on port: ${PORT}`);
 // });
 
-
-
-app.get("/", (req, res) => res.send("Home"));
-
-
-var port = process.env.PORT || 3000;
-
-app.listen(port, () =>
-  console.log(`Server running on ${port}, http://localhost:${port}`)
-);
-
 async function sendMessage(message) {
   // The chat_id received in the message update
   chats.forEach((id) => {
@@ -64,9 +53,18 @@ async function checkMaiBalance() {
     sendMessage("MAI available for mint on yvDAI vault: " + balanceParsed);
   }
 }
+  sendMessage("working!");
 
 checkMaiBalance();
 const interval = setInterval(function () {
   sendMessage("working!");
   checkMaiBalance();
 }, 60000);
+
+app.get("/", (req, res) => res.send("Home"));
+
+var port = process.env.PORT || 3000;
+
+app.listen(port, () =>
+  console.log(`Server running on ${port}, http://localhost:${port}`)
+);
