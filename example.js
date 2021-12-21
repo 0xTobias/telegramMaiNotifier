@@ -55,6 +55,7 @@ async function checkMaiBalance() {
   }
 }
 
+
 checkMaiBalance();
 const interval = setInterval(function () {
   checkMaiBalance();
