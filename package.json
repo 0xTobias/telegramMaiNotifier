@@ -1,4 +1,8 @@
 {
+  "name": "mai-notyfier",
+  "version": "0.0.1",
+  "description": "Bot Telegram",
+  "private": true,
   "main": "example.js",
   "scripts": {
     "heroku-prebuild": "npm install",
