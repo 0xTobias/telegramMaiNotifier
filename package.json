@@ -1,6 +1,7 @@
 {
   "main": "example.js",
   "scripts": {
+    "heroku-prebuild": "npm install",
     "start": "node example.js",
     "build": "npm install"
   },
