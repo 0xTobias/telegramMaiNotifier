@@ -8,7 +8,8 @@
     "heroku-prebuild": "npm install",
     "start": "node example.js",
     "build": "npm install",
-    "ci": "npm install"
+    "ci": "npm install",
+    "heroku-postbuild": "npm install"
   },
   "dependencies": {
     "body-parser": "^1.19.1",
