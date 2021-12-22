@@ -52,18 +52,20 @@ async function checkMaiBalance() {
 }
   sendMessage("working!");
 
-checkMaiBalance();
-const interval = setInterval(function () {
-  sendMessage("working!");
-  checkMaiBalance();
-}, 60000);
-
 const express = require("express");
 const app = express();
-
-app.use(express.json({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+var http = require("http").Server(app);
 
 app.get("/", (req, res) => res.send("Home"));
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
+var port = process.env.PORT || 3000;
+http.listen(port, function () {
+  checkMaiBalance();
+  const interval = setInterval(function () {
+    sendMessage("working!");
+    checkMaiBalance();
+  }, 60000);
+  console.log("listening on *:" + port);
+});
