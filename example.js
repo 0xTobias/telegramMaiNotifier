@@ -1,12 +1,9 @@
 const Web3 = require("web3");
 var TelegramBot = require("telegrambot");
-var express = require("express");
 require("dotenv").config();
 
 // ENTER A VALID RPC URL!
 const web3 = new Web3("https://rpc.ftm.tools/");
-
-var app = express();
 
 const BOT_API = process.env.BOT_API;
 var api = new TelegramBot(BOT_API);
@@ -61,10 +58,12 @@ const interval = setInterval(function () {
   checkMaiBalance();
 }, 60000);
 
+const express = require("express");
+const app = express();
+
+app.use(express.json({ extended: false }));
+
 app.get("/", (req, res) => res.send("Home"));
 
-var port = process.env.PORT || 3000;
-
-app.listen(port, () =>
-  console.log(`Server running on ${port}, http://localhost:${port}`)
-);
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
